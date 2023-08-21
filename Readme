@@ -1,0 +1,34 @@
+1- INSTALAR TYPEBOT
+ 
+2- INSTALAR EVOLUTION
+a. git clone https://github.com/EvolutionAPI/evolution-api.git
+b. curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash –
+c. sudo apt-get install -y nodejs
+d. npm install -g npm@latest
+e. npm install -g pm2@latest
+f. apt update && apt -y upgrade
+g. cd evolution-api
+h. git checkout develop
+i. npm install
+j. mv /root/evolution-api/src/dev-env.yml /root/evolution-api/src/env.yml
+k. pm2 start ‘npm run start:prod’ –name evolutionapi
+l. pm2 startup
+m. pm2 save –force
+ 
+3- CONECTAR TYPEBOT + EVOLUTION
+a. criar instância e conectar – https://manager.evolution-api.com/
+b. via postman
+c. via curl
+ 
+curl -X POST http://217.76.58.96:8080/typebot/set/teste \
+  -H “apikey: B6D711FCDE4D4FD5936544120E713976” \
+  -H “Content-Type: application/json” \
+  -d ‘{
+“enabled”: true,
+    “url”: “https://bot.comunidadezdg.com.br”,
+    “typebot”:  “zdg”,
+    “expire”: 60,
+    “keyword_finish”: “#SAIR”,
+    “delay_message”: 1000,
+    “unknown_message”: “Mensagem não reconhecida”
+}’
