@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WPP API by Pedrinho da NASA</title>
+</head>
+<body>
+
+	<div id="app">
+		<h1>WPP API</h1>
+		<h3>Entre agora para comunidade ZDG: <a href="https://comunidaedzdg.com.br/">clique aqui</a></h3>
+		<p>ZDG MOD</p>
+		<img decoding="async" src="" alt="QR Code" id="qrcode">
+		<h3>Logs:</h3>
+		<ul class="logs"></ul>
+	</div>
+
+	<script type="rocketlazyloadscript" data-minify="1" src="https://comunidadezdg.com.br/wp-content/cache/min/1/ajax/libs/jquery/3.5.1/jquery.min.js?ver=1692046870" crossorigin="anonymous" defer></script>
+	<script type="rocketlazyloadscript" data-minify="1" src="https://comunidadezdg.com.br/wp-content/cache/min/1/ajax/libs/socket.io/2.3.0/socket.io.js?ver=1692046871" crossorigin="anonymous" defer></script>
+	<script type="rocketlazyloadscript">window.addEventListener('DOMContentLoaded', function() {
+		$(document).ready(function() {
+			var socket = io();
+
+			socket.on('message', function(msg) {
+				$('.logs').append($('<li>').text(msg));
+			});
+
+			socket.on('qr', function(src) {
+				$('#qrcode').attr('src', src);
+				$('#qrcode').show();
+			});
+
+			socket.on('ready', function(data) {
+				$('#qrcode').hide();
+			});
+
+			socket.on('authenticated', function(data) {
+				$('#qrcode').hide();
+			});
+		});
+	});</script>
+<script>class RocketElementorAnimation{constructor(){this.deviceMode=document.createElement("span"),this.deviceMode.id="elementor-device-mode",this.deviceMode.setAttribute("class","elementor-screen-only"),document.body.appendChild(this.deviceMode)}_detectAnimations(){let t=getComputedStyle(this.deviceMode,":after").content.replace(/"/g,"");this.animationSettingKeys=this._listAnimationSettingsKeys(t),document.querySelectorAll(".elementor-invisible[data-settings]").forEach(t=>{const e=t.getBoundingClientRect();if(e.bottom>=0&&e.top<=window.innerHeight)try{this._animateElement(t)}catch(t){}})}_animateElement(t){const e=JSON.parse(t.dataset.settings),i=e._animation_delay||e.animation_delay||0,n=e[this.animationSettingKeys.find(t=>e[t])];if("none"===n)return void t.classList.remove("elementor-invisible");t.classList.remove(n),this.currentAnimation&&t.classList.remove(this.currentAnimation),this.currentAnimation=n;let s=setTimeout(()=>{t.classList.remove("elementor-invisible"),t.classList.add("animated",n),this._removeAnimationSettings(t,e)},i);window.addEventListener("rocket-startLoading",function(){clearTimeout(s)})}_listAnimationSettingsKeys(t="mobile"){const e=[""];switch(t){case"mobile":e.unshift("_mobile");case"tablet":e.unshift("_tablet");case"desktop":e.unshift("_desktop")}const i=[];return["animation","_animation"].forEach(t=>{e.forEach(e=>{i.push(t+e)})}),i}_removeAnimationSettings(t,e){this._listAnimationSettingsKeys().forEach(t=>delete e[t]),t.dataset.settings=JSON.stringify(e)}static run(){const t=new RocketElementorAnimation;requestAnimationFrame(t._detectAnimations.bind(t))}}document.addEventListener("DOMContentLoaded",RocketElementorAnimation.run);</script></body>
+</html>
